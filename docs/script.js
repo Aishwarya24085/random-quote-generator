@@ -9,13 +9,18 @@ function showQuote() {
 
   const flap = document.querySelector(".flap-upper");
   const letter = document.querySelector(".letter");
-  const base = document.querySelector(".base");
+  const flapright = document.querySelector(".flap-right");
+  const flapleft = document.querySelector(".flap-left");
+  const flapbottom = document.querySelector(".flap-bottom");
   const randomIndex = Math.floor(Math.random() * quotes.length);
 
   letter.classList.toggle("show")
   flap.classList.toggle("open");
 
   if (letter.classList.contains("show")) {
+    flapright.style.zIndex = "7";
+    flapleft.style.zIndex = "7";
+    flapbottom.style.zIndex = "7";
     fetch("https://thequoteshub.com/api/")
       .then(response => {
         if (!response.ok) throw new Error("Failed to fetch quote");
@@ -31,7 +36,12 @@ function showQuote() {
       })
       .catch(error => {
         console.error("Error fetching from Quotes Hub:", error);
-        quoteText.textContent = "Couldn't fetch a quote 💔";
+        quoteText.textContent = "Couldn't fetch a quote";
       });
+  }
+  else{
+    flapright.style.zIndex = "7";
+    flapleft.style.zIndex = "7";
+    flapbottom.style.zIndex = "7";
   }
 }
